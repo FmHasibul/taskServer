@@ -15,13 +15,13 @@ async function run() {
         const TaskCollections = client.db('Taskapp').collection('taskCollection')
         const UserCollections = client.db('Taskapp').collection('users')
 
-
+        // add Task 
         app.post('/addTask', async (req, res) => {
             const task = req.body;
             const result = await TaskCollections.insertOne(task);
             res.send(result);
         });
-
+        // all task
         app.get('/allTask', async (req, res) => {
             const email = req.query.email
             console.log(email);
@@ -29,6 +29,7 @@ async function run() {
             const cursor = await TaskCollections.find(query).toArray();
             res.send(cursor)
         });
+        // updated 
         app.put('/allTask/:id', async (req, res) => {
             const id = req.params.id;
             console.log(id);
